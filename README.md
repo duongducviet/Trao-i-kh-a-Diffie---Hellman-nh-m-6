@@ -1,4 +1,4 @@
-# Hệ thống trao đổi khóa Diffie–Hellman (DH) và ứng dụng bảo vệ dữ liệu
+# Hệ thống trao đổi khóa Diffie–Hellman (DH)
 
 Dự án được thực hiện trong khuôn khổ học phần **An toàn bảo mật thông tin (ATBMTT)**, nhằm nghiên cứu và cài đặt thuật toán trao đổi khóa Diffie–Hellman bằng Python. Hệ thống kết hợp lõi toán học lũy thừa modulo tự cài đặt theo phương pháp *Square-and-Multiply* với các thành phần mật mã từ thư viện `cryptography`, gồm HKDF-SHA256, AES-256-GCM và chữ ký số Ed25519.
 
@@ -129,8 +129,6 @@ Mục tiêu là kiểm tra sự tương đồng của kết quả tính lũy th�
 
 ## 4. Lưu ý an toàn
 
-Mã nguồn được xây dựng phục vụ mục đích học tập và minh họa nguyên lý mật mã học, không phải một triển khai hoàn chỉnh để sử dụng trực tiếp trong môi trường sản xuất.
+Chương trình được xây dựng phục vụ mục đích học tập và minh họa thuật toán Diffie–Hellman, chưa phải một triển khai hoàn chỉnh để sử dụng trong môi trường thực tế.
 
-Hàm `power_mod()` minh họa thuật toán Square-and-Multiply nhưng chưa áp dụng kỹ thuật thực thi thời gian hằng (*constant-time execution*) để hạn chế nguy cơ tấn công kênh kề (*timing side-channel attacks*).
-
-Trong môi trường thực tế, nên ưu tiên giao thức và thư viện mật mã đã được chuẩn hóa, kiểm chứng. ECDHE có thể hỗ trợ bảo mật chuyển tiếp hoàn hảo (Perfect Forward Secrecy – PFS); chữ ký số và chứng chỉ số có thể hỗ trợ xác thực danh tính. Mức độ bảo vệ còn phụ thuộc vào thiết kế giao thức, cấu hình và cách quản lý khóa.
+Hàm power_mod() tự cài đặt chưa áp dụng kỹ thuật thực thi thời gian hằng (constant-time execution), nên có thể tồn tại nguy cơ tấn công kênh kề. Ngoài ra, Diffie–Hellman nguyên bản không tự xác thực danh tính đối phương, do đó cần kết hợp cơ chế xác thực phù hợp để hạn chế tấn công MITM.
